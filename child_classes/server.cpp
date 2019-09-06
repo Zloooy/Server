@@ -9,7 +9,7 @@ Server::Server():
 {}
 void Server::run()
 {
-	int sock = socket(AF_INET, SOCK_DGRAM, 0), type_size = sizeof(double), num_bytes; 
+	int sock = socket(AF_INET, SOCK_DGRAM, 0), type_size = sizeof(double_bytes), num_bytes; 
         Server::double_bytes buf;
 	struct sockaddr_in addr;
 	if (sock < 0) throw "Cannot create socket";
@@ -17,6 +17,7 @@ void Server::run()
 	addr.sin_port = htons(port);
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	if (bind(sock, (struct sockaddr*)&addr, sizeof(addr)) < 0) throw "Can't bind socket";
+        std::cout << "socket bound" << std::endl;
 	while(isRunning())
 	{
 		num_bytes = recvfrom(sock, buf.bytes, type_size, 0, NULL, NULL); 

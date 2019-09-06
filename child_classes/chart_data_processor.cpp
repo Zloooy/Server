@@ -38,7 +38,7 @@ void ChartDataProcessor::process(double d)
         }
             i++;
     }
-    std::cout << d << " > " << range_borders.end();
+    std::cout << d << " > " << *(range_borders.end());
     data2send.values[i]++;
     data2send.max_count = data2send.max_count > data2send.values[i] ? data2send.max_count:data2send.values[i];
     std::cout << "ended chart processing" << std::endl;

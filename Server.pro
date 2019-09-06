@@ -30,7 +30,13 @@ HEADERS += qcustomplot.h \
            child_classes/graph.h \
            child_classes/test_server.h \
            child_classes/chart.h \
-           child_classes/chart_data_processor.h 
+           child_classes/chart_data_processor.h \
+           child_classes/stats_label.h \
+           child_classes/min_max_data_processor.h \
+           child_classes/stats_tab.h \
+           child_classes/average_data_processor.h \
+           child_classes/square_deviation_data_processor.h \
+           child_classes/expected_value_data_processor.h
 SOURCES += main.cpp \
            qcustomplot.cpp \
            base_classes/background_service.cpp \
@@ -39,5 +45,10 @@ SOURCES += main.cpp \
            child_classes/graph_data_processor.cpp \
            child_classes/graph.cpp \
            child_classes/chart_data_processor.cpp \
-           child_classes/chart.cpp
-
+           child_classes/chart.cpp \
+           child_classes/stats_label.cpp \
+           child_classes/stats_tab.cpp \
+           child_classes/min_max_data_processor.cpp \
+           child_classes/average_data_processor.cpp \
+           child_classes/square_deviation_data_processor.cpp \
+           child_classes/expected_value_data_processor.cpp
