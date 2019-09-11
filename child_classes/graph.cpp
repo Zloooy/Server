@@ -6,6 +6,7 @@ Graph::Graph(QWidget * parent):
     graphic -> setPen(QColor(50, 50, 255, 255));
     graphic -> setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 4));
     graphic -> setAdaptiveSampling(true);
+    graphic -> setSelectable(true);
     QCustomPlot::xAxis -> setRange(0, 100);
     QCustomPlot::replot();
     QObject::connect(animTimer, &QTimer::timeout, this, &Graph::redraw);

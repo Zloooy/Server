@@ -36,7 +36,11 @@ HEADERS += qcustomplot.h \
            child_classes/stats_tab.h \
            child_classes/average_data_processor.h \
            child_classes/square_deviation_data_processor.h \
-           child_classes/expected_value_data_processor.h
+           child_classes/expected_value_data_processor.h \
+           child_classes/led_indicator.h \
+           child_classes/led_new_data_data_processor.h \
+           child_classes/led_data_left_data_processor.h \
+           child_classes/data_buffer.h
 SOURCES += main.cpp \
            qcustomplot.cpp \
            base_classes/background_service.cpp \
@@ -51,4 +55,7 @@ SOURCES += main.cpp \
            child_classes/min_max_data_processor.cpp \
            child_classes/average_data_processor.cpp \
            child_classes/square_deviation_data_processor.cpp \
-           child_classes/expected_value_data_processor.cpp
+           child_classes/expected_value_data_processor.cpp \
+           child_classes/led_indicator.cpp \
+           child_classes/led_data_processor.h \
+           child_classes/data_buffer.cpp
