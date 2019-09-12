@@ -3,7 +3,7 @@
 #include <QVector>
 #include "base_classes/pipe.h"
 typedef struct{
-    double min_y = 0, max_y = 0, max_x = 0, x, y;
+    double min_y, max_y, max_x, x, y;
 } graph_data;
 class GraphDataProcessor: public Pipe<double, graph_data>
 {

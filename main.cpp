@@ -37,8 +37,13 @@ int main(int argc, char * argv[])
     //UI
     MainWindow main_window;
     std::cout << "Created main window" << std::endl;
-    QPushButton cancel_button("Сброс");
+    QPushButton cancel_button("Сброс"), zoom_out_button("Весь график");
+    zoom_out_button.setEnabled(false);
     QObject::connect(&cancel_button, &QPushButton::clicked, [&serv]{serv.clear_listeners();});
+    QObject::connect(&zoom_out_button, &QPushButton::clicked, [&data_buffer, &zoom_out_button]{
+            data_buffer.emit_all_data();
+            zoom_out_button.setEnabled(false);
+            });
     Graph graph;
     Chart chart;
     StatsTab stats_tab;
@@ -55,9 +60,10 @@ int main(int argc, char * argv[])
     expected_value.start();
     std::cout << "Started plots" << std::endl;
     //Layouts
-    main_window.addWidgetAtRight(&cancel_button);
     main_window.addWidgetAtRight(&new_data);
     main_window.addWidgetAtRight(&data_left);
+    main_window.addWidgetAtRight(&zoom_out_button);
+    main_window.addWidgetAtRight(&cancel_button);
     main_window.addTab(&graph, "График");
     main_window.addTab(&chart, "Гистограмма");
     main_window.addTab(&stats_tab, "Статистика");
@@ -65,6 +71,9 @@ int main(int argc, char * argv[])
     serv.addListener(&data_buffer);
     serv.addListenerChain(&graph_dp, &graph);
     data_buffer.addListener(&graph_dp);
+    QObject::connect(&graph, &Graph::selected_range, [&data_buffer, &zoom_out_button](int from, int to){
+            zoom_out_button.setEnabled(true);
+            data_buffer.emit_data_range(from, to);});
     serv.addListenerChain(&chart_dp, &chart);
     data_buffer.addListener(&chart_dp);
     serv.addListenerChain(&min_max_dp, &min_max);

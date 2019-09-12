@@ -6,6 +6,7 @@
 class DataBuffer: public Listener<double>, public Sender<double>
 {
     std::vector<double> all_data;
+    bool emitted_data_range = false;
     public:
         void recieve(double) override;
         void clear() override;

@@ -13,5 +13,9 @@ class Graph: public QCustomPlot, public QueueListener<graph_data>
     public: 
         Graph(QWidget * parent = Q_NULLPTR);
         void clear() override;
+    signals:
+        void selected_range(int, int);
+    public slots:
+        void selection_changed(bool);
 };
 #endif

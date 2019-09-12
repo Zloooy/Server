@@ -10,6 +10,7 @@ void DataBuffer::clear()
 }
 void DataBuffer::emit_all_data()
 {
+    emitted_data_range = false;
     clear_listeners();
     for (std::vector<double>::iterator it = all_data.begin(); it != all_data.end(); it++)
     {
@@ -18,9 +19,13 @@ void DataBuffer::emit_all_data()
 }
 void DataBuffer::emit_data_range(int begin, int end)
 {
+    if (!emitted_data_range)
+    {
+        emitted_data_range = true;
     clear_listeners();
     for (int i = begin; i < end; i++)
     {
         send(all_data[i]);
+    }
     }
 }

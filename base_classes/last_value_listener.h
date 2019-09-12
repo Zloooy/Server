@@ -15,7 +15,7 @@ class LastValueListener: public Listener<msgtype>
 template<typename msgtype>
 void LastValueListener<msgtype>::recieve(msgtype msg)
 {
-	std::cout << "lvl recieving " << std::endl;
+    //std::cout << "lvl recieving " << std::endl;
     if (last_value != nullptr) delete last_value;
     last_value = new msgtype(msg);
 }
@@ -28,6 +28,7 @@ void LastValueListener<msgtype>::clear()
 template<typename msgtype>
 LastValueListener<msgtype>::~LastValueListener()
 {
+    if (last_value != nullptr) delete last_value;
     delete last_value;
 }
 #endif

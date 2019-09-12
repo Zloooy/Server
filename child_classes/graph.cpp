@@ -2,13 +2,16 @@
 Graph::Graph(QWidget * parent):
     QCustomPlot(parent)
 {
+    setInteractions(QCP::iSelectPlottables);
+    setSelectionRectMode(QCP::srmSelect);
     graphic = QCustomPlot::addGraph();
     graphic -> setPen(QColor(50, 50, 255, 255));
     graphic -> setScatterStyle(QCPScatterStyle(QCPScatterStyle::ssCircle, 4));
     graphic -> setAdaptiveSampling(true);
-    graphic -> setSelectable(true);
+    graphic -> setSelectable(QCP::stDataRange);
     QCustomPlot::xAxis -> setRange(0, 100);
     QCustomPlot::replot();
+    QObject::connect(graphic, qOverload<bool>(&QCPGraph::selectionChanged), this, &Graph::selection_changed);
     QObject::connect(animTimer, &QTimer::timeout, this, &Graph::redraw);
     animTimer -> start(50);
 }
@@ -41,10 +44,13 @@ void Graph::redraw()
         msg_queue.pop();
         QCustomPlot::replot();
     }
-    /*else
-    {
-        std::cout << "data is null" << std::endl;
-        //graph -> setData(nullptr);
-    }*/
     animTimer -> start(50);
+}
+void Graph::selection_changed(bool selected)
+{
+    if (selected)
+    {
+        QCPDataRange range = graphic -> selection().dataRange(0);
+        selected_range(range.begin(), range.end());
+    }
 }
